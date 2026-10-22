@@ -134,9 +134,19 @@ Gradient checkpointing throughput cost: 699.6 -> 559.5 samp/s (**20.0% slower**)
 
 ## HW4.5 Part C - Two cards at once (DDP)
 
-_Pending: run `torchrun --nproc_per_node=1 hw45_partC_ddp.py` (single-GPU baseline)._
+Single-GPU DDP baseline on NVIDIA GeForce RTX 4090 (single-node, world size 1). The two-GPU pairing was confirmed optional by the TA (2026-10-22) and was not run; the lab machine has one GPU.
 
-_Pending: run the instructor-assigned 2-GPU pairing, e.g. `torchrun --nproc_per_node=2 hw45_partC_ddp.py`._
+| Batch/GPU | Throughput (samp/s) | Step (ms) | Compute (ms) | Comm overhead (ms) | Peak memory (GiB) |
+|---|---|---|---|---|---|
+| 8 | 254.2 | 31.47 | 28.68 | 2.79 | 2.065 |
+| 16 | 520.2 | 30.76 | 32.28 | 0.0 | 2.086 |
+| 32 | 733.4 | 43.63 | 43.19 | 0.44 | 2.467 |
+| 64 | 926.0 | 69.11 | 67.69 | 1.42 | 3.714 |
+| 128 | 1036.1 | 123.54 | 123.53 | 0.01 | 6.088 |
+| 256 | 1080.6 | 236.91 | 236.45 | 0.46 | 10.935 |
+
+
+With one GPU there is no gradient all-reduce, so the comm-overhead column is the timing noise floor of the method (up to 2.79 ms); a two-GPU run would need overhead above this to count as real communication cost. Throughput matches Part A within ~3%.
 
 ## HW4.5 Part D - Serving re-run on real hardware
 

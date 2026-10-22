@@ -287,7 +287,19 @@ single = next((v for k, v in pc.items() if k.startswith("partC_w1")), None)
 multi = [v for k, v in pc.items() if not k.startswith("partC_w1")]
 if not single:
     md.append(pending("`torchrun --nproc_per_node=1 hw45_partC_ddp.py` (single-GPU baseline)"))
-if not multi:
+if not multi and single:
+    t = single["topology"]
+    md.append(f"Single-GPU DDP baseline on {t['gpus'][0]} ({'single-node' if t['single_node'] else 'multi-node'}, "
+              f"world size {t['world_size']}). The two-GPU pairing was confirmed optional by the TA (2026-10-22) and "
+              "was not run; the lab machine has one GPU.\n")
+    md.append(table(["Batch/GPU", "Throughput (samp/s)", "Step (ms)", "Compute (ms)", "Comm overhead (ms)",
+                     "Peak memory (GiB)"],
+                    [[x["per_gpu_batch"], x["samples_per_s"], x["step_ms"], x["compute_step_ms"],
+                      x["comm_overhead_ms"], x["peak_alloc_gib"]] for x in single["rows"]]))
+    md.append("\nWith one GPU there is no gradient all-reduce, so the comm-overhead column is the timing noise floor "
+              f"of the method (up to {max(x['comm_overhead_ms'] for x in single['rows'])} ms); a two-GPU run would "
+              "need overhead above this to count as real communication cost. Throughput matches Part A within ~3%.\n")
+elif not multi:
     md.append(pending("the instructor-assigned 2-GPU pairing, e.g. `torchrun --nproc_per_node=2 hw45_partC_ddp.py`"))
 for m in multi:
     t = m["topology"]
