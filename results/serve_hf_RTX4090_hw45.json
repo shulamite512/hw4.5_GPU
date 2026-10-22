@@ -1,0 +1,42 @@
+{
+  "env": {
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_tag": "RTX4090",
+    "vram_gib": 23.99,
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "transformers": "4.57.6",
+    "python": "3.12.3",
+    "host": "ADS-R15-836-04"
+  },
+  "backend": "hf",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "precision": "torch.bfloat16",
+  "new_tokens": 128,
+  "rows": [
+    {
+      "config": "HF pipeline, batch 1",
+      "batch_size": 1,
+      "requests": 96,
+      "generated_tokens": 12288,
+      "wall_s": 195.47,
+      "tokens_per_s": 62.9,
+      "p50_ms": 2025.1,
+      "p95_ms": 2112.6
+    }
+  ],
+  "samples": [
+    {
+      "prompt": "Explain in two sentences why a GPU is faster than a CPU for training neural networks.",
+      "output": "A GPU is faster than a CPU for training neural networks because it has many more processing cores and can perform parallel operations simultaneously, allowing it to process large amounts of data much faster than a CPU."
+    },
+    {
+      "prompt": "Write a tweet complaining about a delayed flight, then rewrite it to sound polite.",
+      "output": "Tweet: \"Ugh, my flight was cancelled and I have to wait for hours at the airport! This is so frustrating! Can someone please help me find an alternative route or reschedule my flight? #flightdelay\"\n\nRewritten in a polite tone:\n\"Apologies for any inconvenience caused, but unfortunately my flight has been delayed due to unforeseen circumstances. I would greatly appreciate assistance finding an alternate route or rescheduling my travel plans as soon as possible. Thank you.\""
+    },
+    {
+      "prompt": "What is the difference between precision and recall? Give a spam-filter example.",
+      "output": "Precision and Recall are two important metrics used in evaluating the performance of classification models, particularly in tasks like spam filtering.\n\n1. Precision: This measures the proportion of true positive predictions out of all the predicted positives (i.e., the number of correctly identified spam emails divided by the total number of predicted spam emails). In other words, it tells us how many of the emails we've flagged as spam were actually spam.\n\n2. Recall: This measures the proportion of actual positive cases that were correctly identified (i.e., the number of spam emails that were correctly identified divided by the total number of actual spam emails). It tells us how well our model can detect spam emails.\n\nIn a spam filter context:\n\n- **True Positive (TP)**: An email is both labeled as spam and classified as spam.\n- **False Positive (FP)**: An email is not spam but is incorrectly classified as spam.\n- **True Negative (TN)**: An email is neither spam nor ham (non-spam)"
+    }
+  ]
+}

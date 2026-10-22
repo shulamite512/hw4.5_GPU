@@ -1,0 +1,75 @@
+{
+  "env": {
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_tag": "RTX4090",
+    "vram_gib": 23.99,
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "transformers": "4.57.6",
+    "python": "3.12.3",
+    "host": "ADS-R15-836-04"
+  },
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "arch": {
+    "layers": 28,
+    "kv_heads": 2,
+    "head_dim": 128,
+    "kv_bytes_per_token": 28672,
+    "max_position_embeddings": 32768
+  },
+  "batch": 8,
+  "weights_gib": 2.876,
+  "rows": [
+    {
+      "ctx": 1024,
+      "kv_measured_gib": 0.227,
+      "kv_analytic_gib": 0.219,
+      "peak_total_gib": 3.607
+    },
+    {
+      "ctx": 2048,
+      "kv_measured_gib": 0.445,
+      "kv_analytic_gib": 0.438,
+      "peak_total_gib": 3.828
+    },
+    {
+      "ctx": 3072,
+      "kv_measured_gib": 0.664,
+      "kv_analytic_gib": 0.656,
+      "peak_total_gib": 4.049
+    },
+    {
+      "ctx": 4096,
+      "kv_measured_gib": 0.883,
+      "kv_analytic_gib": 0.875,
+      "peak_total_gib": 4.268
+    },
+    {
+      "ctx": 8192,
+      "kv_measured_gib": 1.758,
+      "kv_analytic_gib": 1.75,
+      "peak_total_gib": 5.26
+    },
+    {
+      "ctx": 16384,
+      "kv_measured_gib": 3.508,
+      "kv_analytic_gib": 3.5,
+      "peak_total_gib": 7.518
+    },
+    {
+      "ctx": 32768,
+      "kv_measured_gib": 7.008,
+      "kv_analytic_gib": 7.0,
+      "peak_total_gib": 12.033
+    },
+    {
+      "ctx": 58368,
+      "kv_measured_gib": 12.477,
+      "kv_analytic_gib": 12.469,
+      "peak_total_gib": 19.089
+    }
+  ],
+  "longest_ctx": 58368,
+  "oom_at": 59392,
+  "note": "beyond max_position_embeddings the memory number is valid but output quality is not"
+}

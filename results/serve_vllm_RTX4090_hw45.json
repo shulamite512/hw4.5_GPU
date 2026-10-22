@@ -1,0 +1,82 @@
+{
+  "env": {
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_tag": "RTX4090",
+    "vram_gib": 23.99,
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "transformers": "4.57.6",
+    "python": "3.12.3",
+    "host": "ADS-R15-836-04"
+  },
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "precision": "bfloat16",
+  "new_tokens": 128,
+  "rows": [
+    {
+      "config": "vLLM, batch 1",
+      "batch_size": 1,
+      "requests": 96,
+      "generated_tokens": 12288,
+      "wall_s": 60.307,
+      "tokens_per_s": 203.8,
+      "p50_ms": 626.1,
+      "p95_ms": 646.3
+    },
+    {
+      "config": "vLLM, batch 8",
+      "batch_size": 8,
+      "requests": 96,
+      "generated_tokens": 12288,
+      "wall_s": 8.899,
+      "tokens_per_s": 1380.8,
+      "p50_ms": 738.3,
+      "p95_ms": 771.0
+    },
+    {
+      "config": "vLLM, batch 32",
+      "batch_size": 32,
+      "requests": 96,
+      "generated_tokens": 12288,
+      "wall_s": 2.215,
+      "tokens_per_s": 5546.5,
+      "p50_ms": 739.1,
+      "p95_ms": 740.1
+    }
+  ],
+  "samples": [
+    {
+      "prompt": "Explain in two sentences why a GPU is faster than a CPU for training neural networks.",
+      "output": "A GPU is faster than a CPU for training neural networks because it has many more parallel processing cores that can execute multiple operations simultaneously, allowing it to process large amounts of data and perform complex calculations more quickly."
+    },
+    {
+      "prompt": "Write a tweet complaining about a delayed flight, then rewrite it to sound polite.",
+      "output": "Tweet:\n\"Ugh, my flight from LA to NYC is still delayed by 4 hours! Can't believe this is happening. Where's my bag? I'm sooooo stressed out! \ud83d\ude22\"\n\nRewritten to sound polite:\n\"Sorry for any inconvenience, but my flight from LA to NYC is still delayed by 4 hours. I hope to make it by the time we land in NYC. In the meantime, I'll make the most of my free time and catch up on some reading. Thanks for your understanding!\""
+    },
+    {
+      "prompt": "What is the difference between precision and recall? Give a spam-filter example.",
+      "output": "Precision and recall are two important metrics used in evaluating the performance of a binary classifier, such as a spam filter. They are often used in conjunction with each other to provide a more complete picture of a classifier's performance.\nPrecision is the ratio of true positive predictions to the total number of positive predictions. In other words, it measures the proportion of positive predictions that are actually correct. A high precision means that the classifier is correctly identifying a large number of actual positive cases.\nRecall, on the other hand, is the ratio of true positive predictions to the total number of actual positive cases. It measures the proportion of actual positive cases that are correctly identified by the classifier. A high recall means that the classifier is correctly identifying a large number of actual positive cases.\nIn a spam filter example, the positive class could be \"spam,\" and the negative class could be \"not spam.\" Suppose a spam filter is designed to classify emails as either spam or not spam. If the filter correctly identifies 90"
+    },
+    {
+      "prompt": "Summarise the plot of Romeo and Juliet for a ten-year-old.",
+      "output": "Romeo and Juliet is a tragic love story about two young people from feuding families who fall in love. They are forbidden to marry by their parents, but they secretly meet and fall deeply in love. They have a passionate and happy love affair, but their families, who hate each other, don't approve of their love. When the two families decide to marry their children, a tragic event happens, leading to the deaths of the two young lovers. The story is filled with love, jealousy, and revenge, and it teaches us the importance of understanding and respecting each other's differences."
+    },
+    {
+      "prompt": "List three ways to reduce GPU memory use when fine-tuning BERT.",
+      "output": "To reduce GPU memory use when fine-tuning BERT, you can follow these three strategies:\n\n1. **Fine-tuning BERT with smaller models**: Instead of using the full-size BERT model, you can use a smaller variant of the model. For example, using the `bert-base-uncased` model instead of `bert-large-uncased` can significantly reduce the memory footprint. This is because smaller models have fewer parameters, which means they require less GPU memory to run.\n\n2. **Using a smaller sequence length**: If you are fine-tuning on a specific task, you might find that a shorter sequence length is sufficient for your use case. For example, if you are fine-tuning on a text classification task, you might find that a sequence length of 128 is sufficient, rather than the default 512 for BERT. This reduces the memory required by the model.\n\n3. **Using a smaller batch size**: A smaller batch size can also"
+    },
+    {
+      "prompt": "Is the sentence 'great, my phone died again' positive or negative? Explain.",
+      "output": "The sentence \"great, my phone died again\" can be interpreted in two ways, and both are subjective and context-dependent:\n\n1. **Positive Interpretation**: Some people might see this as a positive thing, especially if they view phone \"dying\" as a sign of something significant or important happening. For example, they might see it as a sign of an important call coming, a significant moment, or an opportunity. The phrase \"great\" suggests that whatever is happening is a positive outcome.\n\n2. **Negative Interpretation**: Other people might interpret it as a negative thing, especially if they associate \"dying\" with a technical failure or a problem. They might see it as a sign of a malfunction or a need for repair or replacement, which could be inconvenient or frustrating.\n\nThe interpretation depends on the context in which the sentence is used and the listener's perspective."
+    },
+    {
+      "prompt": "Write a haiku about batch sizes.",
+      "output": "Batch sizes vary,\nNumbers too large to count,\nNature's perfect balance."
+    },
+    {
+      "prompt": "Give me a one-paragraph pitch for a coffee shop run by robots.",
+      "output": "Our robot-driven coffee shop offers an innovative and efficient way to enjoy your morning coffee. With advanced AI technology, our robots prepare and serve your drinks with precision and speed, ensuring a seamless and enjoyable experience. Plus, our environmentally friendly and sustainable practices make it a great choice for conscious consumers. Whether you're in a hurry or just want a quick pick-me-up, our robot-driven coffee shop is the perfect solution for you."
+    }
+  ]
+}

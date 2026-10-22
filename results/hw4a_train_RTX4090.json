@@ -1,0 +1,227 @@
+{
+  "env": {
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_tag": "RTX4090",
+    "vram_gib": 23.99,
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "transformers": "5.20.2",
+    "python": "3.13.14",
+    "host": "ADS-R15-836-04"
+  },
+  "data": {
+    "source": "cardiffnlp/tweet_eval (sentiment), splits train+validation+test concatenated",
+    "dataset_rows": 59899,
+    "row_start": 384,
+    "row_end": 5383,
+    "rows_used": 5000,
+    "rows_dropped_nan": 0,
+    "seed": 1384,
+    "max_len": 64,
+    "labels": [
+      "negative",
+      "neutral",
+      "positive"
+    ],
+    "n_train": 3500,
+    "n_val": 750,
+    "n_test": 750,
+    "class_counts": {
+      "negative": 779,
+      "neutral": 2283,
+      "positive": 1938
+    },
+    "stratified": true
+  },
+  "cfg": {
+    "batch_size": 32,
+    "epochs": 4,
+    "lr": 2e-05,
+    "eps": 1e-08,
+    "amp": false,
+    "grad_ckpt": false,
+    "accum": 1,
+    "optim": "adamw",
+    "seed": 1384
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.8913,
+      "val_loss": 0.7855,
+      "val_acc": 0.6213,
+      "epoch_train_s": 5.29,
+      "samples_per_s": 661.5,
+      "elapsed_s": 5.54
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.6255,
+      "val_loss": 0.7108,
+      "val_acc": 0.6827,
+      "epoch_train_s": 4.92,
+      "samples_per_s": 711.1,
+      "elapsed_s": 10.82
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.4663,
+      "val_loss": 0.7519,
+      "val_acc": 0.6853,
+      "epoch_train_s": 5.04,
+      "samples_per_s": 695.0,
+      "elapsed_s": 16.23
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.3503,
+      "val_loss": 0.7814,
+      "val_acc": 0.6867,
+      "epoch_train_s": 5.02,
+      "samples_per_s": 697.4,
+      "elapsed_s": 21.5
+    }
+  ],
+  "overtraining": {
+    "best_val_loss_epoch": 2,
+    "best_val_acc_epoch": 4,
+    "epochs_trained": 4,
+    "extra_epochs": 2,
+    "extra_train_s": 10.06,
+    "val_loss_at_best": 0.7108,
+    "val_loss_final": 0.7814,
+    "test_acc_best_ckpt": 0.6907,
+    "test_acc_final_epoch": 0.688
+  },
+  "test_loss": 0.6928,
+  "test_acc": 0.6907,
+  "reload_test_acc": 0.6907,
+  "confusion_matrix": [
+    [
+      73,
+      35,
+      9
+    ],
+    [
+      35,
+      238,
+      69
+    ],
+    [
+      11,
+      73,
+      207
+    ]
+  ],
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "per_class": [
+    {
+      "label": "negative",
+      "precision": 0.6134,
+      "recall": 0.6239,
+      "f1": 0.6186,
+      "support": 117
+    },
+    {
+      "label": "neutral",
+      "precision": 0.6879,
+      "recall": 0.6959,
+      "f1": 0.6919,
+      "support": 342
+    },
+    {
+      "label": "positive",
+      "precision": 0.7263,
+      "recall": 0.7113,
+      "f1": 0.7188,
+      "support": 291
+    }
+  ],
+  "worst_class": "negative",
+  "misclassified": [
+    {
+      "row": 481,
+      "text": "@user even I didn't know it's 18th sept at KL Live to be exact :p",
+      "true": "negative",
+      "pred": "neutral",
+      "diagnosis": "TODO"
+    },
+    {
+      "row": 5017,
+      "text": "Assam Congress leader Nilomoni sen deka reffered Smritini Irani as PM's 2nd wife..And Still Rahul Gandhi talks about women Empowerment.",
+      "true": "negative",
+      "pred": "neutral",
+      "diagnosis": "TODO"
+    },
+    {
+      "row": 2512,
+      "text": "Don't want to hear Seth Rollins Speech about how great he is tomorrow bruh.",
+      "true": "negative",
+      "pred": "positive",
+      "diagnosis": "TODO"
+    },
+    {
+      "row": 4768,
+      "text": "\"Not happy that I'm working through the advance screening tomorrow, so still have to wait OVER TWO WEEKS to see Paper Towns #wallofcow\"",
+      "true": "negative",
+      "pred": "neutral",
+      "diagnosis": "TODO"
+    },
+    {
+      "row": 5144,
+      "text": "@user Hi, was offered the 6 months free Netflix last Tuesday and was told it takes 5 days to receive a code but haven't got anything\"",
+      "true": "negative",
+      "pred": "neutral",
+      "diagnosis": "TODO"
+    }
+  ],
+  "custom_inference": [
+    {
+      "text": "just landed and my bag is already at the carousel, best flight ever",
+      "pred": "positive",
+      "probs": {
+        "negative": 0.02,
+        "neutral": 0.035,
+        "positive": 0.944
+      }
+    },
+    {
+      "text": "three hours on the tarmac and nobody tells us anything",
+      "pred": "negative",
+      "probs": {
+        "negative": 0.516,
+        "neutral": 0.409,
+        "positive": 0.075
+      }
+    },
+    {
+      "text": "the meeting got moved to thursday",
+      "pred": "neutral",
+      "probs": {
+        "negative": 0.084,
+        "neutral": 0.805,
+        "positive": 0.111
+      }
+    },
+    {
+      "text": "oh great, another monday. exactly what i needed",
+      "pred": "positive",
+      "probs": {
+        "negative": 0.017,
+        "neutral": 0.054,
+        "positive": 0.929
+      }
+    }
+  ],
+  "hw45_baseline": {
+    "wall_clock_s": 21.5,
+    "train_only_s": 20.27,
+    "peak_alloc_gib": 2.472,
+    "peak_reserved_gib": 2.967
+  },
+  "saved_model": "C:\\Users\\chelsi\\Desktop\\g2\\models\\bert_twitter_s384_seed1384"
+}

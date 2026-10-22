@@ -1,0 +1,49 @@
+RUN_LOG - DATA 266 HW4.a / HW4.5   (SID4=1384, SLICE=384, SEED=1384)
+Machine: ADS-R15-836-04, Windows 11, NVIDIA GeForce RTX 4090 24 GB, UUID GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce,
+driver 610.60, Python 3.13, torch 2.11.0+cu128, transformers 5.20.2, bitsandbytes 0.50.2
+
+Entries marked [backfilled] were reconstructed from console output and process start times before automatic
+logging (runlog.py) was added; durations marked ~ are estimates. All later entries are written automatically
+by runlog.py at the end of each run (start -> end, duration, status, exact command, GPU UUID).
+
+---- 2026-10-21 -------------------------------------------------------------------------------------------
+[backfilled] 13:44 ~1 min    failed       python hw4a_train.py --slice 0 --seed 42 --epochs 1
+    setup smoke test (by AI assistant): transformers 5 removed BertTokenizer.batch_encode_plus -> fixed in common.py
+[backfilled] ~13:47 ~1 min   completed    python hw4a_train.py --slice 0 --seed 42 --epochs 1
+    setup smoke test (by AI assistant), placeholder slice/seed; outputs overwritten by the real run below
+[backfilled] ~13:50 ~1 min   completed    python bench_one.py --bs 64 --amp --optim adamw8bit / --bs 64 --grad-ckpt
+    setup smoke test (by AI assistant) of the Part A/B probe
+[backfilled] 14:04:55 ~1.5 min completed  python hw4a_train.py
+    HW4.a fine-tune, rows 384-5383, 4 epochs, bs 32: test acc 0.6907, peak 2.472 GiB, wall clock 21.5 s
+[backfilled] 14:06:35 ~8 min interrupted  python hw45_partA_batch_scaling.py
+    INVALID: bs=1024 did not OOM - Windows sysmem fallback spilled to system RAM (39.9 GiB "peak", 67.9 samp/s)
+[backfilled] 14:21:27 ~27 min completed   python hw45_partA_batch_scaling.py
+    INVALID: memory cap set to fraction 1.0, which PyTorch treats as "no cap"; bs=1024/2048 spilled (39.9/78.3 GiB)
+[backfilled] ~15:44 ~2 min   completed    memory-cap verification (by AI assistant): fraction 1.0 vs 0.99, bench_one --bs 1024
+    fraction 1.0 allocated 40 GiB on the 24 GiB card; 0.99 OOMs at 23 GiB; bs=1024 now OOMs (23.7 GiB reserved)
+[backfilled] 15:46:55 ~4 min completed    python hw45_partA_batch_scaling.py
+    VALID Part A result: max batch 512 (20.591 GiB, 1145.3 samp/s), OOM at 1024
+[backfilled] 15:52:28 -> 16:12:21  1193 s  completed  python hw45_partB_memory.py
+    Part B (end = results/partB_RTX4090.json write time): 6 configurations + grad accumulation, all valid
+[2026-10-21T17:22:32 -> 2026-10-21T17:22:33]      1.0 s  failed: ModuleNotFoundError python hw4a_serve.py --backend hf
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce
+[2026-10-21T17:23:06 -> 2026-10-21T17:27:01]    235.1 s  completed    python hw4a_serve.py --backend hf
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce
+[2026-10-21T17:27:27 -> 2026-10-21T17:27:40]     12.7 s  failed: AttributeError python hw4a_serve.py --backend vllm
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce
+[2026-10-21T17:35:07 -> 2026-10-21T17:36:58]    111.1 s  completed    python hw4a_serve.py --backend vllm
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce
+[2026-10-21T17:37:00 -> 2026-10-21T17:40:29]    209.0 s  completed    python hw4a_serve.py --backend hf
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce
+[2026-10-21T17:41:23 -> 2026-10-21T17:44:53]    210.1 s  completed    python hw4a_serve.py --backend hf --tag hw45
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce
+[2026-10-21T17:44:53 -> 2026-10-21T17:46:26]     92.6 s  completed    python hw4a_serve.py --backend vllm --tag hw45
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce
+[2026-10-21T17:48:54 -> 2026-10-21T18:02:25]    811.4 s  interrupted  python hw45_partD_kv_cache.py --backend hf
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce
+[2026-10-21T18:02:40 -> 2026-10-21T18:05:15]    154.9 s  completed    python hw45_partD_kv_cache.py --backend hf
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce
+[2026-10-21T18:08:24 -> 2026-10-21T18:09:05]     40.9 s  completed    python hw45_partD_kv_cache.py --backend vllm
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce
+[2026-10-21T18:19:12 -> 2026-10-21T18:20:06]     53.9 s  completed    python hw45_partC_ddp.py
+    host=ADS-R15-836-04 world=1 gpus: NVIDIA GeForce RTX 4090 GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce

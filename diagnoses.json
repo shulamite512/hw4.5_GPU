@@ -1,0 +1,8 @@
+{
+  "_note": "One-line diagnosis per misclassified test tweet, keyed by dataset row. make_report.py fills these into REPORT.md.",
+  "481": "No negative words at all and a playful ':p'; the gold 'negative' label looks debatable (label noise), so neutral is a defensible prediction.",
+  "5017": "Negativity is carried by irony ('And still ... talks about women empowerment') around a factual report full of names; the model reads the surface as news-like and neutral.",
+  "2512": "Negation scoping: the model latched onto 'how great he is' and missed that 'Don't want to hear' flips it.",
+  "4768": "Explicit 'Not happy' is outweighed by positive-context words (advance screening, see Paper Towns); BERT under-weights the negation at the start.",
+  "5144": "A polite customer-service complaint phrased as a factual timeline ('was told... haven't got anything'); the grievance is implied, not stated with sentiment words."
+}
