@@ -298,7 +298,8 @@ if not multi and single:
                       x["comm_overhead_ms"], x["peak_alloc_gib"]] for x in single["rows"]]))
     md.append("\nWith one GPU there is no gradient all-reduce, so the comm-overhead column is the timing noise floor "
               f"of the method (up to {max(x['comm_overhead_ms'] for x in single['rows'])} ms); a two-GPU run would "
-              "need overhead above this to count as real communication cost. Throughput matches Part A within ~3%.\n")
+              "need overhead above this to count as real communication cost. Small batches are launch-bound and "
+              "vary between runs; compare batch 64 and above with Part A.\n")
 elif not multi:
     md.append(pending("the instructor-assigned 2-GPU pairing, e.g. `torchrun --nproc_per_node=2 hw45_partC_ddp.py`"))
 for m in multi:
@@ -361,6 +362,10 @@ if train and metrics:
                   f"(x 1 GPU), excluding validation passes.\n")
 else:
     md.append(pending("HW4.a training and Part B"))
+
+ANSWERS = os.path.join(ROOT, "ANSWERS.md")  # hand-written answers; kept separate so a rebuild never erases them
+if os.path.exists(ANSWERS):
+    md.append(open(ANSWERS, encoding="utf-8").read())
 
 with open(os.path.join(ROOT, "REPORT.md"), "w", encoding="utf-8") as f:
     f.write("\n".join(md))

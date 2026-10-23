@@ -58,16 +58,14 @@ into this folder and re-run `make_report.py`; the tables and the throughput plot
 | All figures | `plots/*.png` | `make_report.py` |
 | METRICS.md (HW4.5 summary) | `METRICS.md` | `make_report.py` |
 | RUN_LOG.txt | `RUN_LOG.txt` | automatic (`runlog.py`), plus backfilled early entries |
+| Saved terminal output of every run | `outputs/<date>_<time>_<script>.log` | automatic (`runlog.py`); runs before 2026-10-22 saved from the terminal text copied at the time (marked in each file) |
 | AI_USE.md | `AI_USE.md` | draft; fill in the bracketed parts |
 | Reservation record | `RESERVATION.md` + `captures/reservation_*` | fill in by hand |
 | GPU-hour record | `GPU_HOURS.md` | `make_report.py`, from the run log |
 | Repository tagged `hw4-5` | git | `git tag hw4-5 && git push origin hw4-5` once results are final |
 
-## Written answers still needed after running
+## Written answers
 
-`make_report.py` computes the numbers and states the factual conclusions; these still need your own sentences:
-1. Diagnoses of the five misclassified tweets (the `Diagnosis` column says `TODO`).
-2. The 3-4 sentence latency-vs-throughput answer (HW4.1).
-3. Why the max-batch ratio ≠ VRAM ratio (Part A); which technique to apply first and which to skip on 32 GB (Part B).
-4. Part C interconnect path and the scaling explanation for your pairing; Part D explanation vs HW4 numbers.
-5. Part E: the single configuration you'd choose for a full fine-tune.
+`make_report.py` computes every number; the written answers live in `ANSWERS.md` (and the misclassification
+diagnoses in `diagnoses.json`), which `make_report.py` merges into `REPORT.md`. Edit those two files, never
+`REPORT.md` itself: it is rebuilt from scratch on every run.

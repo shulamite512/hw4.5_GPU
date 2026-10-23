@@ -1,0 +1,17 @@
+# Terminal output of this run, saved verbatim from the terminal text copied at the time
+# (recorded before automatic output saving was added).
+# INVALID RUN: bs=1024 did not OOM because the Windows driver's sysmem fallback spilled into system RAM
+# (39.9 GiB "peak" on a 24 GiB card, 67.9 samp/s). Stopped with Ctrl+C; nothing was saved. Kept as evidence.
+W1021 14:06:35.819000 41756 torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Part A on RTX4090: doubling batch size from 1 until OOM
+  bs=     1:     35.2 samp/s  peak 2.061 GiB  epoch 99.51 s
+  bs=     2:     69.5 samp/s  peak 2.062 GiB  epoch 50.39 s
+  bs=     4:    140.2 samp/s  peak 2.067 GiB  epoch 24.97 s
+  bs=     8:    280.4 samp/s  peak 2.066 GiB  epoch 12.48 s
+  bs=    16:    503.6 samp/s  peak 2.088 GiB  epoch 6.95 s
+  bs=    32:    706.8 samp/s  peak 2.472 GiB  epoch 4.95 s
+  bs=    64:    931.7 samp/s  peak 3.726 GiB  epoch 3.76 s
+  bs=   128:   1028.3 samp/s  peak 6.11 GiB  epoch 3.4 s
+  bs=   256:   1092.8 samp/s  peak 10.978 GiB  epoch 3.2 s
+  bs=   512:   1148.0 samp/s  peak 20.591 GiB  epoch 3.05 s
+  bs=  1024:     67.9 samp/s  peak 39.852 GiB  epoch 51.57 s

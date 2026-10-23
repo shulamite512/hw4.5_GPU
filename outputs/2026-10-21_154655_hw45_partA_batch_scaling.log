@@ -1,0 +1,19 @@
+# Terminal output of this run, saved verbatim from the terminal text copied at the time
+# (recorded before automatic output saving was added). VALID Part A run (memory cap 0.99).
+PS C:\Users\chelsi\Desktop\g2> python hw45_partA_batch_scaling.py
+W1021 15:46:55.718000 29572 torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Part A on RTX4090: doubling batch size from 1 until OOM
+  bs=     1:     28.9 samp/s  peak 2.061 GiB  epoch 121.1 s
+  bs=     2:     63.9 samp/s  peak 2.062 GiB  epoch 54.81 s
+  bs=     4:    121.3 samp/s  peak 2.067 GiB  epoch 28.87 s
+  bs=     8:    226.7 samp/s  peak 2.066 GiB  epoch 15.44 s
+  bs=    16:    477.5 samp/s  peak 2.088 GiB  epoch 7.33 s
+  bs=    32:    708.2 samp/s  peak 2.472 GiB  epoch 4.94 s
+  bs=    64:    920.8 samp/s  peak 3.726 GiB  epoch 3.8 s
+  bs=   128:   1022.7 samp/s  peak 6.11 GiB  epoch 3.42 s
+  bs=   256:   1086.3 samp/s  peak 10.978 GiB  epoch 3.22 s
+  bs=   512:   1145.3 samp/s  peak 20.591 GiB  epoch 3.06 s
+  bs=  1024: OOM
+Largest batch that runs: 512 (OOM at 1024); peak throughput 1145.3 samp/s at bs=512
+[saved] C:\Users\chelsi\Desktop\g2\results\partA_RTX4090.json
+PS C:\Users\chelsi\Desktop\g2>

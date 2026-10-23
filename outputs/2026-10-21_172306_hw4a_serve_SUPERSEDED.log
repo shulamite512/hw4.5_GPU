@@ -1,0 +1,43 @@
+# Terminal output of this run, saved verbatim from the terminal text copied at the time
+# (recorded before automatic output saving was added; long progress bars shortened to █…█).
+# SUPERSEDED: this HF baseline ran under transformers 5.20; it was re-run at 17:37:00 under transformers 4.x so
+# both backends used the same library versions (63.6 vs 63.1 tok/s, within 1%). Its results file was overwritten.
+(hw4.5) chelsi@ADS-R15-836-04:/mnt/c/Users/chelsi/Desktop/g2$ python hw4a_serve.py --backend hf
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+config.json: 100%|█…█| 660/660 [00:00<00:00, 5.25MB/s]
+tokenizer_config.json: 100%|█…█| 7.30k/7.30k [00:00<00:00, 16.1MB/s]
+vocab.json: 100%|█…█| 2.78M/2.78M [00:00<00:00, 149MB/s]
+merges.txt: 100%|█…█| 1.67M/1.67M [00:00<00:00, 168MB/s]
+tokenizer.json: 100%|█…█| 7.03M/7.03M [00:00<00:00, 202MB/s]
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+model.safetensors: downloading bytes: █…█| 2.69GB, 98.2MB/s
+model.safetensors: reconstructing file: 100%|█…█| 3.09GB / 3.09GB,  183MB/s
+Loading weights: 100%|█…█| 338/338 [00:00<00:00, 3045.80it/s]
+generation_config.json: 100%|█…█| 242/242 [00:00<00:00, 2.13MB/s]
+[transformers] You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+  HF pipeline, batch 1:     63.6 tok/s   p50   2003.2 ms   p95   2053.5 ms
+
+Sample generations:
+> Explain in two sentences why a GPU is faster than a CPU for training neural networks.
+A GPU is faster than a CPU for training neural networks because it has many more processing cores and can perform parallel operations simultaneously, allowing it to process large amounts of data much faster than a CPU.
+
+> Write a tweet complaining about a delayed flight, then rewrite it to sound polite.
+Tweet: "Ugh, my flight was cancelled and I have to wait for hours at the airport! This is so frustrating! Can someone please help me find an alternative route or reschedule my flight? #flightdelay"
+
+Rewritten in a polite tone:
+"Apologies for any inconvenience caused, but unfortunately my flight has been delayed due to unforeseen circumstances. I would greatly appreciate assistance finding an alternate route or rescheduling my travel plans as soon as possible. Thank you."
+
+> What is the difference between precision and recall? Give a spam-filter example.
+Precision and Recall are two important metrics used in evaluating the performance of classification models, particularly in tasks like spam filtering.
+
+1. Precision: This measures the proportion of true positive predictions out of all the predicted positives (i.e., the number of correctly identified spam emails divided by the total number of predicted spam emails). In other words, it tells us how many of the emails we've flagged as spam were actually spam.
+
+2. Recall: This measures the proportion of actual positive cases that were correctly identified (i.e., the number of spam emails that were correctly identified divided by the total number of actual spam emails). It tells us how well our model can detect spam emails.
+
+In a spam filter context:
+
+- **True Positive (TP)**: An email is both labeled as spam and classified as spam.
+- **False Positive (FP)**: An email is not spam but is incorrectly classified as spam.
+- **True Negative (TN)**: An email is neither spam nor ham (non-spam)
+
+[saved] /mnt/c/Users/chelsi/Desktop/g2/results/serve_hf_RTX4090.json

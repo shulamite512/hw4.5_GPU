@@ -11,7 +11,8 @@
 | Smoke tests | Ran short test runs with placeholder settings (slice 0, seed 42, 1 epoch) to catch errors before the real runs; these are listed in `RUN_LOG.txt` and the GPU-hour record and their outputs were overwritten. |
 | Debugging | Found and fixed: (1) `batch_encode_plus` removed in transformers 5; (2) Windows "sysmem fallback" letting batch 1024 spill into system RAM instead of raising OOM; (3) `set_per_process_memory_fraction(1.0)` not enforcing a cap in PyTorch (fixed with 0.99; verified by test). |
 | Analysis | Interpreted results and drafted the five misclassification diagnoses (`diagnoses.json`) and explanatory text in `REPORT.md`. |
-| Documentation | Drafted `README.md`, `RUN_LOG.txt` backfill entries, this file, and the reservation/GPU-hour templates. |
+| Documentation | Drafted `README.md`, `RUN_LOG.txt` backfill entries, this file, the reservation/GPU-hour templates, and the written answers in `ANSWERS.md`. |
+| Saved outputs | Saved the terminal output of the runs before 2026-10-22 into `outputs/` from the terminal text I had copied at the time (verbatim; long progress bars shortened); later runs save their output automatically. |
 
 ## What I did
 

@@ -1,0 +1,52 @@
+# Terminal output of this run, saved verbatim from the terminal text copied at the time
+# (recorded before automatic output saving was added; long progress bars shortened to █…█).
+PS C:\Users\chelsi\Desktop\g2> python hw4a_train.py
+W1021 14:04:55.193000 34248 torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Data: cardiffnlp/tweet_eval (sentiment), splits train+validation+test concatenated
+Rows 384-5383 (0-based, inclusive) = 5000 rows; train/val/test = 3500/750/750; classes {'negative': 779, 'neutral': 2283, 'positive': 1938}
+Loading weights: 100%|█…█| 199/199 [00:00<00:00, 827.94it/s]
+[transformers] BertForSequenceClassification LOAD REPORT from: bert-base-uncased
+Key                                        | Status     | Details
+-------------------------------------------+------------+--------
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.predictions.bias                       | UNEXPECTED |
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+cls.seq_relationship.weight                | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.seq_relationship.bias                  | UNEXPECTED |
+classifier.weight                          | MISSING    |
+classifier.bias                            | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+epoch 1: train_loss=0.8913 val_loss=0.7855 val_acc=0.6213 (5.3s, 661.5 samp/s)
+epoch 2: train_loss=0.6255 val_loss=0.7108 val_acc=0.6827 (4.9s, 711.1 samp/s)
+epoch 3: train_loss=0.4663 val_loss=0.7519 val_acc=0.6853 (5.0s, 695.0 samp/s)
+epoch 4: train_loss=0.3503 val_loss=0.7814 val_acc=0.6867 (5.0s, 697.4 samp/s)
+Writing model shards: 100%|█…█| 1/1 [00:00<00:00,  4.35it/s]
+Loading weights: 100%|█…█| 201/201 [00:00<00:00, 898.34it/s]
+
+Confusion matrix (rows = true, cols = predicted): ['negative', 'neutral', 'positive']
+[[ 73  35   9]
+ [ 35 238  69]
+ [ 11  73 207]]
+    negative: P=0.613 R=0.624 F1=0.619 n=117
+     neutral: P=0.688 R=0.696 F1=0.692 n=342
+    positive: P=0.726 R=0.711 F1=0.719 n=291
+Worst class: negative
+  row 481: [negative -> neutral] @user even I didn't know it's 18th sept at KL Live to be exact :p
+  row 5017: [negative -> neutral] Assam Congress leader Nilomoni sen deka reffered Smritini Irani as PM's 2nd wife..And Still Rahul Gandhi talks about women Empowerment.
+  row 2512: [negative -> positive] Don't want to hear Seth Rollins Speech about how great he is tomorrow bruh.
+  row 4768: [negative -> neutral] "Not happy that I'm working through the advance screening tomorrow, so still have to wait OVER TWO WEEKS to see Paper Towns #wallofcow"
+  row 5144: [negative -> neutral] @user Hi, was offered the 6 months free Netflix last Tuesday and was told it takes 5 days to receive a code but haven't got anything"
+Validation loss stopped improving after epoch 2; {'best_val_loss_epoch': 2, 'best_val_acc_epoch': 4, 'epochs_trained': 4, 'extra_epochs': 2, 'extra_train_s': 10.06, 'val_loss_at_best': 0.7108, 'val_loss_final': 0.7814, 'test_acc_best_ckpt': 0.6907, 'test_acc_final_epoch': 0.688}
+Test acc best ckpt 0.6907; after reload 0.6907
+HW4.5 BASELINE: peak alloc 2.472 GiB, wall clock 21.5 s
+   positive {'negative': 0.02, 'neutral': 0.035, 'positive': 0.944}  <- just landed and my bag is already at the carousel, best flight ever
+   negative {'negative': 0.516, 'neutral': 0.409, 'positive': 0.075}  <- three hours on the tarmac and nobody tells us anything
+    neutral {'negative': 0.084, 'neutral': 0.805, 'positive': 0.111}  <- the meeting got moved to thursday
+   positive {'negative': 0.017, 'neutral': 0.054, 'positive': 0.929}  <- oh great, another monday. exactly what i needed
+[saved] C:\Users\chelsi\Desktop\g2\results\hw4a_train_RTX4090.json

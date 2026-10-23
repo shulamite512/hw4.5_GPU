@@ -1,0 +1,224 @@
+# Terminal output of this run, saved verbatim from the terminal text copied at the time
+# (recorded before automatic output saving was added; long progress bars shortened to █…█).
+# The copied text ends at the gradient-accumulation summary; the run then wrote results/partB_RTX4090.json at 16:12:21.
+hon hw45_partB_memory.py
+>>
+W1021 15:52:38.544000 16832 torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+== baseline: max-batch sweep
+  bs=    32:    699.6 samp/s  peak 2.472 GiB  epoch 5.0 s
+  bs=    64:    927.0 samp/s  peak 3.726 GiB  epoch 3.78 s
+  bs=   128:   1026.8 samp/s  peak 6.11 GiB  epoch 3.41 s
+  bs=   256:   1090.8 samp/s  peak 10.978 GiB  epoch 3.21 s
+  bs=   512:   1146.6 samp/s  peak 20.591 GiB  epoch 3.05 s
+  bs=  1024: OOM
+== baseline: accuracy run (HW4 recipe)
+Loading weights: 100%|█…█| 199/199 [00:00<00:00, 627.83it/s]
+[transformers] BertForSequenceClassification LOAD REPORT from: bert-base-uncased
+Key                                        | Status     | Details
+-------------------------------------------+------------+--------
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.bias                       | UNEXPECTED |
+cls.seq_relationship.weight                | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.seq_relationship.bias                  | UNEXPECTED |
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+classifier.weight                          | MISSING    |
+classifier.bias                            | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+    epoch 1: train_loss=0.8913 val_loss=0.7855 val_acc=0.6213 (5.3s, 656.4 samp/s)
+    epoch 2: train_loss=0.6255 val_loss=0.7108 val_acc=0.6827 (5.0s, 703.1 samp/s)
+    epoch 3: train_loss=0.4663 val_loss=0.7519 val_acc=0.6853 (5.0s, 705.4 samp/s)
+    epoch 4: train_loss=0.3503 val_loss=0.7814 val_acc=0.6867 (5.0s, 703.2 samp/s)
+== baseline: max batch 512, 699.6 samp/s @32, peak 2.472 GiB @32, test acc 0.688
+
+== amp: max-batch sweep
+  bs=    32:    767.0 samp/s  peak 2.256 GiB  epoch 4.56 s
+  bs=    64:   1617.4 samp/s  peak 3.036 GiB  epoch 2.16 s
+  bs=   128:   2164.6 samp/s  peak 4.548 GiB  epoch 1.62 s
+  bs=   256:   2289.8 samp/s  peak 7.643 GiB  epoch 1.53 s
+  bs=   512:   2391.2 samp/s  peak 13.857 GiB  epoch 1.46 s
+  bs=  1024: OOM
+== amp: accuracy run (HW4 recipe)
+Loading weights: 100%|█…█| 199/199 [00:00<00:00, 641.39it/s]
+[transformers] BertForSequenceClassification LOAD REPORT from: bert-base-uncased
+Key                                        | Status     | Details
+-------------------------------------------+------------+--------
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.bias                       | UNEXPECTED |
+cls.seq_relationship.weight                | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.seq_relationship.bias                  | UNEXPECTED |
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+classifier.weight                          | MISSING    |
+classifier.bias                            | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+    epoch 1: train_loss=0.9083 val_loss=0.7659 val_acc=0.6547 (4.2s, 835.7 samp/s)
+    epoch 2: train_loss=0.6271 val_loss=0.7306 val_acc=0.6667 (4.3s, 818.0 samp/s)
+    epoch 3: train_loss=0.4725 val_loss=0.7470 val_acc=0.6973 (4.3s, 822.3 samp/s)
+    epoch 4: train_loss=0.3607 val_loss=0.7782 val_acc=0.6787 (4.5s, 781.4 samp/s)
+== amp: max batch 512, 767.0 samp/s @32, peak 2.256 GiB @32, test acc 0.6893
+
+== grad_ckpt: max-batch sweep
+  bs=    32:    559.5 samp/s  peak 2.07 GiB  epoch 6.26 s
+  bs=    64:    712.2 samp/s  peak 2.083 GiB  epoch 4.91 s
+  bs=   128:    774.6 samp/s  peak 2.08 GiB  epoch 4.52 s
+  bs=   256:    811.1 samp/s  peak 2.84 GiB  epoch 4.31 s
+  bs=   512:    840.7 samp/s  peak 4.408 GiB  epoch 4.16 s
+  bs=  1024:    847.7 samp/s  peak 7.563 GiB  epoch 4.13 s
+  bs=  2048:    853.1 samp/s  peak 13.866 GiB  epoch 4.1 s
+  bs=  4096: OOM
+== grad_ckpt: accuracy run (HW4 recipe)
+Loading weights: 100%|█…█| 199/199 [00:00<00:00, 668.43it/s]
+[transformers] BertForSequenceClassification LOAD REPORT from: bert-base-uncased
+Key                                        | Status     | Details
+-------------------------------------------+------------+--------
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.bias                       | UNEXPECTED |
+cls.seq_relationship.weight                | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.seq_relationship.bias                  | UNEXPECTED |
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+classifier.weight                          | MISSING    |
+classifier.bias                            | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+    epoch 1: train_loss=0.8913 val_loss=0.7855 val_acc=0.6213 (6.3s, 555.5 samp/s)
+    epoch 2: train_loss=0.6255 val_loss=0.7108 val_acc=0.6827 (6.3s, 552.2 samp/s)
+    epoch 3: train_loss=0.4663 val_loss=0.7519 val_acc=0.6853 (6.4s, 549.7 samp/s)
+    epoch 4: train_loss=0.3503 val_loss=0.7814 val_acc=0.6867 (6.4s, 546.5 samp/s)
+== grad_ckpt: max batch 2048, 559.5 samp/s @32, peak 2.07 GiB @32, test acc 0.688
+
+== adamw8bit: max-batch sweep
+  bs=    32:    668.8 samp/s  peak 1.87 GiB  epoch 5.23 s
+  bs=    64:    889.9 samp/s  peak 3.081 GiB  epoch 3.93 s
+  bs=   128:   1000.4 samp/s  peak 5.502 GiB  epoch 3.5 s
+  bs=   256:   1068.7 samp/s  peak 10.363 GiB  epoch 3.27 s
+  bs=   512:   1127.9 samp/s  peak 19.986 GiB  epoch 3.1 s
+  bs=  1024: OOM
+== adamw8bit: accuracy run (HW4 recipe)
+Loading weights: 100%|█…█| 199/199 [00:00<00:00, 606.32it/s]
+[transformers] BertForSequenceClassification LOAD REPORT from: bert-base-uncased
+Key                                        | Status     | Details
+-------------------------------------------+------------+--------
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.bias                       | UNEXPECTED |
+cls.seq_relationship.weight                | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.seq_relationship.bias                  | UNEXPECTED |
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+classifier.weight                          | MISSING    |
+classifier.bias                            | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+W1021 16:03:41.566000 16832 torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+    epoch 1: train_loss=0.8907 val_loss=0.7813 val_acc=0.6267 (5.7s, 617.8 samp/s)
+    epoch 2: train_loss=0.6254 val_loss=0.7242 val_acc=0.6773 (5.6s, 627.1 samp/s)
+    epoch 3: train_loss=0.4674 val_loss=0.7594 val_acc=0.6827 (5.5s, 638.1 samp/s)
+    epoch 4: train_loss=0.3485 val_loss=0.7908 val_acc=0.6800 (5.4s, 652.6 samp/s)
+== adamw8bit: max batch 512, 668.8 samp/s @32, peak 1.87 GiB @32, test acc 0.684
+
+== combo_amp_8bit: max-batch sweep
+  bs=    32:    703.4 samp/s  peak 1.635 GiB  epoch 4.98 s
+  bs=    64:   1349.1 samp/s  peak 2.424 GiB  epoch 2.59 s
+  bs=   128:   1963.2 samp/s  peak 3.936 GiB  epoch 1.78 s
+  bs=   256:   2187.0 samp/s  peak 7.033 GiB  epoch 1.6 s
+  bs=   512:   2304.2 samp/s  peak 13.239 GiB  epoch 1.52 s
+  bs=  1024: OOM
+== combo_amp_8bit: accuracy run (HW4 recipe)
+Loading weights: 100%|█…█| 199/199 [00:00<00:00, 614.95it/s]
+[transformers] BertForSequenceClassification LOAD REPORT from: bert-base-uncased
+Key                                        | Status     | Details
+-------------------------------------------+------------+--------
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.bias                       | UNEXPECTED |
+cls.seq_relationship.weight                | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.seq_relationship.bias                  | UNEXPECTED |
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+classifier.weight                          | MISSING    |
+classifier.bias                            | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+    epoch 1: train_loss=0.9122 val_loss=0.7853 val_acc=0.6347 (4.2s, 826.9 samp/s)
+    epoch 2: train_loss=0.6343 val_loss=0.7560 val_acc=0.6680 (4.1s, 848.4 samp/s)
+    epoch 3: train_loss=0.4748 val_loss=0.7537 val_acc=0.6880 (4.1s, 864.0 samp/s)
+    epoch 4: train_loss=0.3632 val_loss=0.7836 val_acc=0.6800 (4.2s, 833.7 samp/s)
+== combo_amp_8bit: max batch 512, 703.4 samp/s @32, peak 1.635 GiB @32, test acc 0.6867
+
+== combo_amp_8bit_ckpt: max-batch sweep
+  bs=    32:    550.6 samp/s  peak 1.082 GiB  epoch 6.36 s
+  bs=    64:   1122.1 samp/s  peak 1.188 GiB  epoch 3.12 s
+  bs=   128:   1694.9 samp/s  peak 1.344 GiB  epoch 2.07 s
+  bs=   256:   1746.7 samp/s  peak 1.935 GiB  epoch 2.0 s
+  bs=   512:   1756.5 samp/s  peak 3.218 GiB  epoch 1.99 s
+  bs=  1024:   1827.3 samp/s  peak 5.781 GiB  epoch 1.92 s
+  bs=  2048:   1874.8 samp/s  peak 10.905 GiB  epoch 1.87 s
+  bs=  4096:   1587.3 samp/s  peak 21.16 GiB  epoch 2.2 s
+  bs=  8192: OOM
+== combo_amp_8bit_ckpt: accuracy run (HW4 recipe)
+Loading weights: 100%|█…█| 199/199 [00:00<00:00, 702.93it/s]
+[transformers] BertForSequenceClassification LOAD REPORT from: bert-base-uncased
+Key                                        | Status     | Details
+-------------------------------------------+------------+--------
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.bias                       | UNEXPECTED |
+cls.seq_relationship.weight                | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.seq_relationship.bias                  | UNEXPECTED |
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+classifier.weight                          | MISSING    |
+classifier.bias                            | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+    epoch 1: train_loss=0.9122 val_loss=0.7853 val_acc=0.6347 (6.3s, 559.6 samp/s)
+    epoch 2: train_loss=0.6343 val_loss=0.7560 val_acc=0.6680 (6.5s, 537.6 samp/s)
+    epoch 3: train_loss=0.4748 val_loss=0.7537 val_acc=0.6880 (7.1s, 496.4 samp/s)
+    epoch 4: train_loss=0.3632 val_loss=0.7836 val_acc=0.6800 (6.4s, 543.2 samp/s)
+== combo_amp_8bit_ckpt: max batch 4096, 550.6 samp/s @32, peak 1.082 GiB @32, test acc 0.6867
+
+== grad accumulation: physical 8 x 16 = effective 128
+Loading weights: 100%|█…█| 199/199 [00:00<00:00, 771.91it/s]
+[transformers] BertForSequenceClassification LOAD REPORT from: bert-base-uncased
+Key                                        | Status     | Details
+-------------------------------------------+------------+--------
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.bias                       | UNEXPECTED |
+cls.seq_relationship.weight                | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.seq_relationship.bias                  | UNEXPECTED |
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+classifier.weight                          | MISSING    |
+classifier.bias                            | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+    epoch 1: train_loss=1.0003 val_loss=0.9313 val_acc=0.5560 (8.4s, 415.6 samp/s)
+    epoch 2: train_loss=0.8460 val_loss=0.8253 val_acc=0.6040 (8.3s, 420.2 samp/s)
+    epoch 3: train_loss=0.7155 val_loss=0.7875 val_acc=0.6373 (8.1s, 430.2 samp/s)
+    epoch 4: train_loss=0.6471 val_loss=0.7652 val_acc=0.6600 (8.3s, 421.8 samp/s)
+   20 optimiser steps: accum 5.922 s / 2.066 GiB vs direct bs=128: 2.507 s / 6.11 GiB; test acc 0.6747

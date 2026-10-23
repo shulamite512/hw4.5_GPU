@@ -1,0 +1,19 @@
+# Terminal output of this run, saved verbatim from the terminal text copied at the time
+# (recorded before automatic output saving was added).
+# Part D KV cache, HF transformers (measured). An earlier attempt at 17:48:54 crawled into system RAM (WSL sysmem
+# fallback) and was interrupted after 811 s with no output saved; this run has the 0.99 VRAM cap.
+(hw4.5) chelsi@ADS-R15-836-04:/mnt/c/Users/chelsi/Desktop/g2$ python hw45_partD_kv_cache.py --backend hf
+`torch_dtype` is deprecated! Use `dtype` instead!
+ctx    1024: KV 0.227 GiB measured, 0.219 analytic; peak 3.607 GiB
+ctx    2048: KV 0.445 GiB measured, 0.438 analytic; peak 3.828 GiB
+ctx    3072: KV 0.664 GiB measured, 0.656 analytic; peak 4.049 GiB
+ctx    4096: KV 0.883 GiB measured, 0.875 analytic; peak 4.268 GiB
+ctx    8192: KV 1.758 GiB measured, 1.75 analytic; peak 5.26 GiB
+ctx   16384: KV 3.508 GiB measured, 3.5 analytic; peak 7.518 GiB
+ctx   24576: KV 5.258 GiB measured, 5.25 analytic; peak 9.775 GiB
+ctx   32768: KV 7.008 GiB measured, 7.0 analytic; peak 12.033 GiB
+ctx   40960: KV 8.758 GiB measured, 8.75 analytic; peak 14.291 GiB
+ctx   49152: KV 10.508 GiB measured, 10.5 analytic; peak 16.549 GiB
+ctx   57344: KV 12.258 GiB measured, 12.25 analytic; peak 18.807 GiB
+HF longest context at batch 8: 58,368 tokens (OOM at 59392)
+[saved] /mnt/c/Users/chelsi/Desktop/g2/results/partD_kv_hf_RTX4090.json

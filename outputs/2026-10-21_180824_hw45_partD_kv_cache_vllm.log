@@ -1,0 +1,6 @@
+# Terminal output of this run, saved verbatim from the terminal text copied at the time
+# (recorded before automatic output saving was added). vLLM's own startup log is captured by the script internally.
+(hw4.5) chelsi@ADS-R15-836-04:/mnt/c/Users/chelsi/Desktop/g2$ python hw45_partD_kv_cache.py --backend vllm
+vLLM KV pool: 677,440 tokens (18.09 GiB). At batch 8: memory allows 84,680 tokens/seq, model allows 32,768 -> servable 32,768
+[saved] /mnt/c/Users/chelsi/Desktop/g2/results/partD_kv_vllm_RTX4090.json
+(hw4.5) chelsi@ADS-R15-836-04:/mnt/c/Users/chelsi/Desktop/g2$

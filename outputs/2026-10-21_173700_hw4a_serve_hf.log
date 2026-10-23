@@ -1,0 +1,34 @@
+# Terminal output of this run, saved verbatim from the terminal text copied at the time
+# (recorded before automatic output saving was added).
+# HW4.a Table HW4.1 - HF pipeline baseline row (transformers 4.x, same environment as the vLLM run).
+python hw4a_serve.py --backend hf
+`torch_dtype` is deprecated! Use `dtype` instead!
+Device set to use cuda:0
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+  HF pipeline, batch 1:     63.1 tok/s   p50   2021.3 ms   p95   2092.0 ms
+
+Sample generations:
+> Explain in two sentences why a GPU is faster than a CPU for training neural networks.
+A GPU is faster than a CPU for training neural networks because it has many more processing cores and can perform parallel operations simultaneously, allowing it to process large amounts of data much faster than a CPU.
+
+> Write a tweet complaining about a delayed flight, then rewrite it to sound polite.
+Tweet: "Ugh, my flight was cancelled and I have to wait for hours at the airport! This is so frustrating! Can someone please help me find an alternative route or reschedule my flight? #flightdelay"
+
+Rewritten in a polite tone:
+"Apologies for any inconvenience caused, but unfortunately my flight has been delayed due to unforeseen circumstances. I would greatly appreciate assistance finding an alternate route or rescheduling my travel plans as soon as possible. Thank you."
+
+> What is the difference between precision and recall? Give a spam-filter example.
+Precision and Recall are two important metrics used in evaluating the performance of classification models, particularly in tasks like spam filtering.
+
+1. Precision: This measures the proportion of true positive predictions out of all the predicted positives (i.e., the number of correctly identified spam emails divided by the total number of predicted spam emails). In other words, it tells us how many of the emails we've flagged as spam were actually spam.
+
+2. Recall: This measures the proportion of actual positive cases that were correctly identified (i.e., the number of spam emails that were correctly identified divided by the total number of actual spam emails). It tells us how well our model can detect spam emails.
+
+In a spam filter context:
+
+- **True Positive (TP)**: An email is both labeled as spam and classified as spam.
+- **False Positive (FP)**: An email is not spam but is incorrectly classified as spam.
+- **True Negative (TN)**: An email is neither spam nor ham (non-spam)
+
+[saved] /mnt/c/Users/chelsi/Desktop/g2/results/serve_hf_RTX4090.json

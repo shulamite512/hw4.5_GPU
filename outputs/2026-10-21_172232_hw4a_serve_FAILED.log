@@ -1,0 +1,10 @@
+# Terminal output of this run, saved verbatim from the terminal text copied at the time
+# (recorded before automatic output saving was added).
+# FAILED: pandas was not yet installed in the WSL environment; fixed by installing it and re-running.
+(hw4.5) chelsi@ADS-R15-836-04:/mnt/c/Users/chelsi/Desktop/g2$ python hw4a_serve.py --backend hf
+Traceback (most recent call last):
+  File "/mnt/c/Users/chelsi/Desktop/g2/hw4a_serve.py", line 18, in <module>
+    from common import env_info, gpu_tag, save_json
+  File "/mnt/c/Users/chelsi/Desktop/g2/common.py", line 18, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'

@@ -1,0 +1,25 @@
+# Terminal output of this run, saved verbatim from the terminal text copied at the time
+# (recorded before automatic output saving was added).
+# INVALID RUN: the memory cap was set to fraction 1.0, which PyTorch treats as "no cap", so bs=1024 and 2048 still
+# spilled into system RAM. Its results file was overwritten by the valid 15:46:55 run. Kept as evidence.
+S C:\Users\chelsi\Desktop\g2> python hw45_partA_batch_scaling.py
+>>
+W1021 14:21:27.431000 32144 torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Part A on RTX4090: doubling batch size from 1 until OOM
+  bs=     1:     34.9 samp/s  peak 2.061 GiB  epoch 100.37 s
+  bs=     2:     69.0 samp/s  peak 2.062 GiB  epoch 50.75 s
+  bs=     4:    142.7 samp/s  peak 2.067 GiB  epoch 24.53 s
+  bs=     8:    280.5 samp/s  peak 2.066 GiB  epoch 12.48 s
+  bs=    16:    506.4 samp/s  peak 2.088 GiB  epoch 6.91 s
+  bs=    32:    714.2 samp/s  peak 2.472 GiB  epoch 4.9 s
+  bs=    64:    930.8 samp/s  peak 3.726 GiB  epoch 3.76 s
+  bs=   128:   1026.8 samp/s  peak 6.11 GiB  epoch 3.41 s
+  bs=   256:   1090.7 samp/s  peak 10.978 GiB  epoch 3.21 s
+  bs=   512:   1146.2 samp/s  peak 20.591 GiB  epoch 3.05 s
+  bs=  1024:     70.6 samp/s  peak 39.852 GiB  epoch 49.59 s
+  bs=  2048:     42.8 samp/s  peak 78.319 GiB  epoch 81.76 s
+  bs=  4096: OOM
+Largest batch that runs: 2048 (OOM at 4096); peak throughput 1146.2 samp/s at bs=512
+[saved] C:\Users\chelsi\Desktop\g2\results\partA_RTX4090.json
+PS C:\Users\chelsi\Desktop\g2>
+PS C:\Users\chelsi\Desktop\g2>

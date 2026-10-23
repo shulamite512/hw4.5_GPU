@@ -1,9 +1,11 @@
-"""Append one entry per script run to RUN_LOG.txt (human-readable) and results/run_log.jsonl (for GPU-hours).
+"""Append one entry per script run to RUN_LOG.txt (human-readable) and results/run_log.jsonl (for GPU-hours),
+and save the run's full terminal output to outputs/<timestamp>_<script>.log.
 
 Import it first thing in a top-level script:  import runlog  # noqa: F401
 Records start/end time, duration, the exact command, GPU name + UUID, host, and whether the run finished,
 failed or was interrupted. Child probe processes (bench_one.py) are deliberately not logged individually;
-their time is inside the parent's duration.
+their time is inside the parent's duration and their summary lines are printed by the parent. vLLM's engine
+process writes to the terminal directly, so its INFO lines appear on screen but not in the saved output.
 """
 import atexit
 import json
@@ -39,6 +41,38 @@ def gpu_info():
 
 
 _gpus = gpu_info()
+
+
+class _Tee:
+    """Write to the terminal and to the saved output file at the same time."""
+
+    def __init__(self, stream, fh):
+        self.stream, self.fh = stream, fh
+
+    def write(self, s):
+        if not self.fh.closed:  # shutdown messages after the file is closed still reach the terminal
+            self.fh.write(s)
+        return self.stream.write(s)
+
+    def flush(self):
+        if not self.fh.closed:
+            self.fh.flush()
+        self.stream.flush()
+
+    def __getattr__(self, name):  # isatty, encoding, fileno ... come from the real terminal stream
+        return getattr(self.stream, name)
+
+
+_out = None
+if "--vllm-child" not in sys.argv and os.environ.get("RANK") in (None, "0"):
+    os.makedirs(os.path.join(ROOT, "outputs"), exist_ok=True)
+    script = os.path.splitext(os.path.basename(sys.argv[0]))[0]
+    _out = open(os.path.join(ROOT, "outputs", f"{datetime.fromtimestamp(_start):%Y-%m-%d_%H%M%S}_{script}.log"),
+                "w", encoding="utf-8")
+    _out.write(f"$ python {' '.join(shlex.quote(a) for a in sys.argv)}\n"
+               f"# started {datetime.fromtimestamp(_start).isoformat(timespec='seconds')} on {platform.node()}\n\n")
+    sys.stdout, sys.stderr = _Tee(sys.stdout, _out), _Tee(sys.stderr, _out)
+
 _prev_hook = sys.excepthook
 
 
@@ -70,6 +104,9 @@ def _write():
     os.makedirs(os.path.dirname(JSONL), exist_ok=True)
     with open(JSONL, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry) + "\n")
+    if _out is not None:
+        _out.write(f"\n# finished {entry['end']} ({entry['duration_s']} s), status: {entry['status']}\n")
+        _out.close()
     gpus = "; ".join(f"{g['name']} {g['uuid']}" for g in entry["gpus"]) or "no GPU found"
     with open(TXT, "a", encoding="utf-8") as f:
         f.write(f"[{entry['start']} -> {entry['end']}] {entry['duration_s']:>8.1f} s  {entry['status']:<12} "
