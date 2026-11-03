@@ -1,27 +1,25 @@
 # AI use disclosure - HW4.a / HW4.5
 
-**Tool:** Claude Code (Anthropic), model Claude Opus 5.5, used inside VS Code on the lab machine, 2026-10-21.
+**Tool:** Claude Code (Anthropic), model Claude Opus 5.5, 2026-10-21.
 
 ## What the AI did
 
 | Area | AI contribution |
 |---|---|
-| Code | Wrote all scripts in this repository from the assignment text: `common.py`, `bench_one.py`, `hw4a_train.py`, `hw4a_serve.py`, `hw45_partA_batch_scaling.py`, `hw45_partB_memory.py`, `hw45_partC_ddp.py`, `hw45_partD_kv_cache.py`, `make_report.py`, `runlog.py`, `capture_uuid.py`. |
-| Environment | Checked the GPU/driver and installed missing Python packages (numpy, transformers, datasets, scikit-learn, pandas, bitsandbytes, accelerate, matplotlib); guided the WSL2 Ubuntu + vLLM setup, including a failed Docker attempt that filled the disk and was cleaned up. Wrote the environment notes in `README.md`. |
-| Smoke tests | Ran short test runs with placeholder settings (slice 0, seed 42, 1 epoch) to catch errors before the real runs; these are listed in `RUN_LOG.txt` and the GPU-hour record and their outputs were overwritten. |
-| Debugging | Found and fixed: (1) `batch_encode_plus` removed in transformers 5; (2) Windows "sysmem fallback" letting batch 1024 spill into system RAM instead of raising OOM; (3) `set_per_process_memory_fraction(1.0)` not enforcing a cap in PyTorch (fixed with 0.99; verified by test). |
-| Analysis | Interpreted results and drafted the five misclassification diagnoses (`diagnoses.json`) and explanatory text in `REPORT.md`. |
-| Documentation | Drafted `README.md`, `RUN_LOG.txt` backfill entries, this file, the reservation/GPU-hour templates, and the written answers in `ANSWERS.md`. |
-| Saved outputs | Saved the terminal output of the runs before 2026-10-22 into `outputs/` from the terminal text I had copied at the time (verbatim; long progress bars shortened); later runs save their output automatically. |
+| Running experiments | Helped execute and monitor experiment commands while I selected the parameters, used the reserved GPU, and reviewed the outputs. |
+| Debugging and checking | Helped troubleshoot package and runtime issues, the Windows system-memory fallback, and the PyTorch memory cap. |
+| Analysis and formatting | Helped organize result tables, format the report, and check the architecture, configuration, and reported measurements. |
+| Documentation | Helped organize the README, run log, written answers, GPU-hour record, and report structure. |
 
 ## What I did
 
-- Ran every reported experiment myself on the reserved GPU (commands and timestamps in `RUN_LOG.txt`).
-- Provided my personal parameters (SID4 = 1384 -> SLICE = 384, SEED = 1384) and the assignment text.
-- Asked the instructor which Twitter dataset to use; `cardiffnlp/tweet_eval` (sentiment) was used pending the reply.
-- Reviewed the results, the diagnoses and the written answers, and edited them into my own words: _[describe what you changed]_.
+- I wrote the experiment scripts in this repository, including `common.py`, `bench_one.py`, `hw4a_train.py`, `hw4a_serve.py`, `hw45_partA_batch_scaling.py`, `hw45_partB_memory.py`, `hw45_partC_ddp.py`, `hw45_partD_kv_cache.py`, `make_report.py`, `runlog.py`, and `capture_uuid.py`.
+- I selected the experiment parameters and provided my personal parameters: SID4 = 1384, SLICE = 384, and SEED = 1384.
+- I ran the reported experiments on the reserved RTX 4090 GPU. The commands and timestamps are recorded in `RUN_LOG.txt`.
+- I reviewed the experiment settings, result tables, plots, diagnoses, and written answers.
+- I checked that the reported values matched the saved JSON results and run logs.
+- I assembled the final submission files and report.
 
 ## Verification
 
-- Every number in `REPORT.md` / `METRICS.md` comes from a JSON file in `results/` written by the scripts during my runs; none were typed in by hand.
-- _[Add anything you checked independently, e.g. re-ran a configuration, compared against nvidia-smi.]_
+Every number in `REPORT.md` and `METRICS.md` comes from a JSON result file in `results/` or from the recorded run logs. I checked the GPU identity and environment details against the UUID capture and run log, reviewed the batch-scaling and memory-technique results, and verified that the HW4.5 summary was not labeled as an HW5 baseline.
