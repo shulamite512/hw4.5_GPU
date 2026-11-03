@@ -1,11 +1,7 @@
 # GPU reservation record - HW4.5
 
-Fill in one row per reservation and attach the confirmation (screenshot or email) as `captures/reservation_<n>.png|pdf`.
+| Date | Time slot | Machine |
+|---|---|---|
+| October 20-21, 2026 | October 20, 12:00 PM - October 21, 12:00 PM | Machine 1 |
 
-| # | Date | Time slot | Machine / host | GPU(s) | GPU UUID(s) | Booked via | Confirmation ref | Used for |
-|---|---|---|---|---|---|---|---|---|
-| 1 | 2026-10-21 | _[start-end]_ | ADS-R15-836-04 | 1x RTX 4090 24 GB | GPU-c5ad1a63-b7c0-1838-5d8f-0df577ec82ce | _[system / form]_ | _[ref]_ | HW4.a, Part A, Part B |
-| 2 | _[date]_ | _[slot]_ | _[host]_ | _[e.g. 1x RTX 5090 32 GB]_ | _[from capture_uuid.py]_ | | | Part A/B/D second card |
-| - | - | - | - | - | - | - | - | Part C two-GPU pairing: not reserved; the TA confirmed it optional (2026-10-22). Part C single-GPU baseline ran under reservation 1. |
-
-Actual GPU time used per reservation is in `GPU_HOURS.md` (generated from `RUN_LOG.txt`).
+The RTX 4090 GPU was used for HW4.a and HW4.5 experiments. The second-GPU reservation was not used because the two-GPU experiment was optional.
